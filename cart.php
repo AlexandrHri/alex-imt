@@ -1,51 +1,37 @@
-<?php 
+<?php
 session_start();
-//if ( isset($_POST['product']) && !empty($_POST['product']) ) {
+if (isset($_SESSION['cart'])) 
+	$_SESSION['cart'];
 
-$product=$_POST['product'];
-$count=$_POST['count'];//}
-
-
-
-$products = [
-
-2=>['name'=>'товар 1', 'price'=>233, 'id'=>0],
-
-7=>['name'=>'товар 2', 'price'=>333, 'id'=>1],
-
-43=>['name'=>'товар 3', 'price'=>332, 'id'=>2],];
+$_SESSION['cart'] =
+['sum'=>0,'tovar'=>[]];
 
 
-$cart =
-['sum'=>50,'items'=>[]];
-
-
-function dobavlenie ($a,$y){
+function dobavlenie ($a,$y,$c){
 	//$cart[items][$a] = ['id'=>10,'quantity'=>10,'price'=>10];
 
-	$cart [items][$a][id]=100;
-	$cart [items][$a][quantity]=$y;
-	$cart [items][$a][price]=10;
-	$sum=$cart[items][$a][quantity]*$cart[items][$a][price];
-	$cart [sum]=$cart[sum]+$sum;
-		return $cart;
+$_SESSION['cart']['tovar'][$a]['id']=$a;
+$_SESSION['cart']['tovar'][$a]['quantity']=$y;
+$_SESSION['cart']['tovar'][$a]['price']=$c;
+$sum=$_SESSION['cart']['tovar'][$a]['quantity']*$_SESSION['cart']['tovar'][$a]['price'];
+$_SESSION['cart']['sum']=$_SESSION['cart']['sum']+$sum;
+		return $_SESSION['cart'];
 }
 
-function update1($y){
-	$cart [items][$y][id]=100;
-	$cart [items][$y][quantity]=$y;
-	$cart [items][$y][price]=10;
-	$cart [sum]=$cart [sum]+($cart[items][$y][quantity]*$cart[items][$y][price]);
-	return $cart;}
+//function update1($y){
+//	$cart ['tovar'][$y]['id']=100;
+//	$cart ['tovar'][$y]['quantity']=$y;
+//	$cart ['tovar'][$y]['price']=10;
+//	$cart ['sum']=$cart ['sum']+($cart['tovar'][$y]['quantity']*$cart['tovar'][$y]['price']);
+//	return $cart;}
 
 	function delite ($z){
-	unset($cart [items][$z]);	
-	return$cart[items][$z];	}
+	unset($_SESSION['cart']['tovar'][$z]);
+	return $_SESSION['cart']['tovar'][$z];
+}
 
 
 	//$cart=dobavlenie($product,$count);
 
 //include "list.php"
-
-
- ?>
+  ?>
